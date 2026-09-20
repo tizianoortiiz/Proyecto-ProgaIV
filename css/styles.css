@@ -180,7 +180,7 @@ p{ margin:0; }
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: 0;
+    z-index: 1;
 }
 
 .video-overlay {
@@ -190,7 +190,7 @@ p{ margin:0; }
     width: 100%;
     height: 100%;
     background: radial-gradient(circle, rgba(13, 13, 15, 0.4) 0%, rgba(13, 13, 15, 0.85) 100%);
-    z-index: 1;
+    z-index: 2;
 }
 
 .hero::before{
@@ -204,12 +204,12 @@ p{ margin:0; }
     background-size:auto, auto, 12px 12px;
     mix-blend-mode:screen;
     pointer-events:none;
-    z-index: 1;
+    z-index: 3;
 }
 
 .hero-inner{
     position:relative;
-    z-index:2;
+    z-index:10;
     max-width:1180px;
     margin:0 auto;
     width:100%;
@@ -267,7 +267,7 @@ p{ margin:0; }
     border:1px solid rgba(255,247,248,.55);
     border-radius:20px;
     transform:translateX(-50%);
-    z-index:3;
+    z-index:10;
 }
 .scroll-cue span{
     position:absolute;
