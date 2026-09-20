@@ -724,3 +724,99 @@ footer a{
     transition:color .2s ease;
 }
 footer a:hover{ color:#d45b68; }
+
+/* =========================================================
+   AJUSTES RESPONSIVE FINALES
+   ========================================================= */
+@media (max-width:640px){
+    html,
+    body{ overflow-x:hidden; }
+
+    .nav-menu nav{ padding:0 6px; }
+    .nav-bar{
+        display:grid;
+        grid-template-columns:repeat(5, minmax(0, 1fr));
+        gap:0;
+        min-height:58px;
+    }
+    .nav-bar > li > a{
+        padding:10px 2px;
+        text-align:center;
+        white-space:nowrap;
+        font-size:.68rem;
+    }
+    .has-dropdown > a::after{ margin-left:2px; }
+    .dropdown{
+        left:50%;
+        right:auto;
+        min-width:210px;
+        margin-left:-105px;
+    }
+
+    .hero{
+        min-height:720px;
+        padding:96px 18px 82px;
+    }
+    .hero-inner{
+        width:100%;
+        padding-right:0;
+    }
+    .hero-title{
+        max-width:100%;
+        font-size:clamp(2.25rem, 13vw, 3.8rem);
+        letter-spacing:1px;
+    }
+    .hero-sub{
+        max-width:100%;
+        font-size:clamp(1.15rem, 6vw, 1.7rem);
+    }
+    .hero-cta,
+    .hero-cta .btn{ width:100%; }
+    .scroll-cue{ bottom:18px; }
+
+    .home-showcase,
+    .gallery-section,
+    .contact-section,
+    .saga-section,
+    .personajes-section{ padding:52px 16px 68px; }
+    .showcase-grid{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
+    .showcase-card-character,
+    .showcase-card-poster{ grid-column:span 1; }
+    .showcase-card h3{ font-size:.7rem; }
+
+    .gallery-hero,
+    .contact-hero,
+    .saga-hero,
+    .personajes-hero{ padding:110px 18px 48px; }
+    .gallery-hero h1,
+    .contact-hero h1,
+    .saga-hero-title,
+    .personajes-hero-title{ font-size:clamp(2rem, 11vw, 3rem); }
+    .gallery-grid{ columns:2 130px; column-gap:10px; }
+    .gallery-item{ margin-bottom:10px; }
+    .gallery-item figcaption{ padding:24px 10px 10px; font-size:.65rem; }
+
+    .saga-list-inner{ gap:22px; }
+    .saga-card{ padding:16px; gap:16px; }
+    .saga-card-content h2{ font-size:1.25rem; }
+    .personajes-list-inner{ grid-template-columns:repeat(2, minmax(0, 1fr)); gap:12px; }
+    .personajes-card-content{ padding:12px; }
+    .personajes-card-content h2{ font-size:.95rem; }
+    .personajes-card-content p{ font-size:.78rem; line-height:1.45; }
+
+    .contact-layout{ gap:34px; }
+    .contact-form{ padding:18px; }
+    .contact-form .btn{ width:100%; }
+
+    footer{ padding:28px 16px; }
+    footer nav{ gap:12px; }
+}
+
+@media (max-width:380px){
+    .nav-bar > li > a{ font-size:.61rem; }
+    .hero-title{ font-size:clamp(2rem, 12vw, 3.2rem); }
+    .showcase-grid,
+    .personajes-list-inner,
+    .gallery-grid{ grid-template-columns:1fr; }
+    .gallery-grid{ columns:1; }
+}
