@@ -303,40 +303,6 @@ p{ margin:0; }
 }
 .hero-stats span{ font-size:.78rem; color:#d9d2e6; }
 
-/* Clases añadidas para el reproductor de música */
-.music-player {
-    position: absolute;
-    bottom: 30px;
-    right: 30px;
-    z-index: 10;
-}
-
-.music-toggle {
-    background: rgba(20, 20, 35, 0.7);
-    border: 1px solid var(--pink);
-    color: #fff;
-    padding: 10px 18px;
-    border-radius: 30px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.9rem;
-    backdrop-filter: blur(8px);
-    transition: all 0.3s ease;
-}
-
-.music-toggle:hover {
-    background: var(--pink);
-    box-shadow: 0 0 15px rgba(184, 50, 67, 0.6);
-    transform: scale(1.05);
-}
-
-.music-toggle.playing {
-    border-color: var(--blue);
-    box-shadow: 0 0 15px rgba(169, 217, 229, 0.5);
-}
-
 @media (min-width:760px){
     .hero{ align-items:center; }
 }
@@ -452,12 +418,14 @@ p{ margin:0; }
 
 
 .gallery-hero{
+    position:relative;
+    overflow:hidden;
     padding:132px 20px 62px;
     background:
         radial-gradient(circle at 78% 20%, rgba(77,46,126,.28), transparent 42%),
         linear-gradient(135deg, #171223 0%, #0d0d0f 70%);
 }
-.gallery-hero-inner{ max-width:1180px; margin:0 auto; }
+.gallery-hero-inner{ position:relative; z-index:2; max-width:1180px; margin:0 auto; }
 .gallery-hero h1{
     margin-bottom:14px;
     color:var(--paper);
@@ -507,14 +475,126 @@ p{ margin:0; }
     background:linear-gradient(transparent, rgba(9,8,12,.92));
 }
 
+/* =========================================================
+   CONTACTO
+   ========================================================= */
+.contact-hero{
+    position:relative;
+    overflow:hidden;
+    padding:132px 20px 62px;
+    background:
+        radial-gradient(circle at 78% 20%, rgba(77,46,126,.28), transparent 42%),
+        linear-gradient(135deg, #171223 0%, #0d0d0f 70%);
+}
+.contact-hero-inner{
+    position:relative;
+    z-index:2;
+    max-width:1180px;
+    margin:0 auto;
+}
+.contact-hero h1{
+    margin-bottom:14px;
+    color:var(--paper);
+    font-size:clamp(2.4rem, 6vw, 4.2rem);
+}
+.contact-hero p:last-child{ color:#c6bbd0; max-width:54ch; }
+.contact-section{
+    padding:72px 20px 100px;
+    background:
+        radial-gradient(circle at 90% 10%, rgba(184,50,67,.12), transparent 28%),
+        #0d0d0f;
+}
+.contact-layout{
+    display:grid;
+    grid-template-columns:minmax(0, .8fr) minmax(0, 1.2fr);
+    gap:64px;
+    max-width:1080px;
+    margin:0 auto;
+    align-items:start;
+}
+.contact-copy h2{
+    max-width:520px;
+    margin-bottom:18px;
+    color:var(--paper);
+    font-size:clamp(1.5rem, 3vw, 2.45rem);
+    line-height:1.15;
+}
+.contact-copy > p:not(.section-label){
+    max-width:46ch;
+    color:#c6bbd0;
+}
+.contact-details{
+    display:grid;
+    gap:16px;
+    margin-top:34px;
+}
+.contact-details a{
+    display:grid;
+    gap:3px;
+    color:#f7edf0;
+    font-size:.92rem;
+}
+.contact-details a:hover{ color:var(--pink); }
+.contact-details span{
+    color:var(--pink);
+    font-size:.68rem;
+    font-weight:800;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+}
+.contact-form{
+    display:grid;
+    gap:18px;
+    padding:28px;
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:14px;
+    background:rgba(32,32,36,.62);
+    box-shadow:0 20px 50px rgba(0,0,0,.22);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+}
+.form-field{ display:grid; gap:8px; }
+.form-field label{
+    color:#f7edf0;
+    font-size:.82rem;
+    font-weight:700;
+}
+.form-field input,
+.form-field textarea{
+    width:100%;
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:8px;
+    padding:12px 14px;
+    background:rgba(13,13,15,.62);
+    color:#fff7f8;
+    font:inherit;
+    resize:vertical;
+}
+.form-field input::placeholder,
+.form-field textarea::placeholder{ color:#8f8798; }
+.form-field input:focus,
+.form-field textarea:focus{
+    outline:2px solid rgba(184,50,67,.55);
+    outline-offset:2px;
+    border-color:var(--pink);
+}
+.contact-form .btn{ justify-self:start; margin-top:4px; }
+
+@media (max-width:760px){
+    .contact-layout{ grid-template-columns:1fr; gap:42px; }
+    .contact-form{ padding:22px; }
+}
+
 .saga-hero{
+    position:relative;
+    overflow:hidden;
     padding:120px 20px 50px;
     background:
         radial-gradient(circle at 80% 20%, rgba(0,217,255,.18), transparent 45%),
         radial-gradient(circle at 20% 80%, rgba(255,32,121,.22), transparent 50%),
         var(--sunset-indigo);
 }
-.saga-hero-inner{ max-width:900px; margin:0 auto; }
+.saga-hero-inner{ position:relative; z-index:2; max-width:900px; margin:0 auto; }
 .saga-hero-title{
     font-size:clamp(2.2rem, 6vw, 3.4rem);
     color:var(--paper);
@@ -569,13 +649,15 @@ p{ margin:0; }
 
 
 .personajes-hero{
+    position:relative;
+    overflow:hidden;
     padding:120px 20px 50px;
     background:
         radial-gradient(circle at 80% 20%, rgba(0,217,255,.18), transparent 45%),
         radial-gradient(circle at 20% 80%, rgba(255,141,199,.2), transparent 50%),
         var(--sunset-indigo);
 }
-.personajes-hero-inner{ max-width:900px; margin:0 auto; }
+.personajes-hero-inner{ position:relative; z-index:2; max-width:900px; margin:0 auto; }
 .personajes-hero-title{
     font-size:clamp(2.2rem, 6vw, 3.4rem);
     color:var(--paper);

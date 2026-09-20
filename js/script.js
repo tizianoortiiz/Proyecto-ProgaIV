@@ -1,4 +1,15 @@
 const hero = document.querySelector('.hero');
+const backgroundAudio = document.querySelector('#bg-audio');
+
+if (backgroundAudio) {
+    const startAudio = () => {
+        backgroundAudio.play().catch(() => {
+            
+        });
+    };
+
+    document.addEventListener('click', startAudio, { once: true, capture: true });
+}
 
 if (hero && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     let ticking = false;
