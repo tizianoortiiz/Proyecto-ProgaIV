@@ -117,7 +117,20 @@ p{ margin:0; }
 @media (max-width:640px){
     .nav-bar{ gap:0; }
     .nav-bar > li > a{ padding:10px 10px; font-size:.85rem; }
-    .dropdown{ min-width:220px; left:auto; right:0; }
+    .dropdown{
+        min-width:220px;
+        left:auto;
+        right:0;
+        opacity:0;
+        visibility:hidden;
+        pointer-events:none;
+    }
+    .has-dropdown.is-open .dropdown{
+        opacity:1;
+        visibility:visible;
+        pointer-events:auto;
+        transform:translateY(0);
+    }
 }
 
 .btn{

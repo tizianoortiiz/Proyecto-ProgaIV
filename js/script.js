@@ -1,5 +1,81 @@
 const hero = document.querySelector('.hero');
 const backgroundAudio = document.querySelector('#bg-audio');
+const dropdownTrigger = document.querySelector('.has-dropdown > a');
+
+const loadPageWithoutReload = async (url, { updateHistory = true } = {}) => {
+    try {
+        const response = await fetch(url.href);
+
+        if (!response.ok) {
+            throw new Error(`No se pudo cargar ${url.href}`);
+        }
+
+        const pageHTML = await response.text();
+        const parsedPage = new DOMParser().parseFromString(pageHTML, 'text/html');
+        const nextMain = parsedPage.querySelector('main');
+        const currentMain = document.querySelector('main');
+
+        if (!nextMain || !currentMain) {
+            throw new Error('La página no contiene un elemento main válido.');
+        }
+
+        currentMain.replaceWith(nextMain);
+        document.title = parsedPage.title;
+
+        if (updateHistory) {
+            window.history.pushState({}, '', url.href);
+        }
+
+        document.querySelector('.has-dropdown')?.classList.remove('is-open');
+        document.querySelector('.has-dropdown > a')?.setAttribute('aria-expanded', 'false');
+        window.scrollTo(0, 0);
+        window.dispatchEvent(new CustomEvent('pagecontentloaded'));
+    } catch {
+        window.location.href = url.href;
+    }
+};
+
+document.addEventListener('click', (event) => {
+    const link = event.target.closest('a');
+
+    if (!link || link.target === '_blank' || link.hasAttribute('download')) {
+        return;
+    }
+
+    const url = new URL(link.href, window.location.href);
+    const isInternalPage = url.origin === window.location.origin && url.pathname.endsWith('.html');
+    const opensMobileDropdown = link === dropdownTrigger
+        && window.matchMedia('(max-width: 640px)').matches
+        && !dropdownTrigger.parentElement.classList.contains('is-open');
+
+    if (isInternalPage && !url.hash && !opensMobileDropdown) {
+        event.preventDefault();
+        loadPageWithoutReload(url);
+    }
+});
+
+window.addEventListener('popstate', () => {
+    loadPageWithoutReload(new URL(window.location.href), { updateHistory: false });
+});
+
+if (dropdownTrigger) {
+    const dropdownItem = dropdownTrigger.parentElement;
+
+    dropdownTrigger.addEventListener('click', (event) => {
+        if (window.matchMedia('(max-width: 640px)').matches && !dropdownItem.classList.contains('is-open')) {
+            event.preventDefault();
+            dropdownItem.classList.add('is-open');
+            dropdownTrigger.setAttribute('aria-expanded', 'true');
+        }
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!dropdownItem.contains(event.target)) {
+            dropdownItem.classList.remove('is-open');
+            dropdownTrigger.setAttribute('aria-expanded', 'false');
+        }
+    });
+}
 
 if (backgroundAudio) {
     const savedTime = Number(sessionStorage.getItem('spiderVerseAudioTime'));
@@ -14,7 +90,7 @@ if (backgroundAudio) {
         backgroundAudio.volume = 1;
 
         backgroundAudio.play().catch(() => {
-            // El navegador puede bloquear el audio hasta una interacción válida.
+            
         });
     };
 
