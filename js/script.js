@@ -44,11 +44,17 @@ document.addEventListener('click', (event) => {
 
     const url = new URL(link.href, window.location.href);
     const isInternalPage = url.origin === window.location.origin && url.pathname.endsWith('.html');
-    const opensMobileDropdown = link === dropdownTrigger
-        && window.matchMedia('(max-width: 640px)').matches
-        && !dropdownTrigger.parentElement.classList.contains('is-open');
 
-    if (isInternalPage && !url.hash && !opensMobileDropdown) {
+    if (link === dropdownTrigger
+        && window.matchMedia('(max-width: 900px)').matches
+        && !dropdownTrigger.parentElement.classList.contains('is-open')) {
+        event.preventDefault();
+        dropdownTrigger.parentElement.classList.add('is-open');
+        dropdownTrigger.setAttribute('aria-expanded', 'true');
+        return;
+    }
+
+    if (isInternalPage && !url.hash) {
         event.preventDefault();
         loadPageWithoutReload(url);
     }
@@ -60,14 +66,6 @@ window.addEventListener('popstate', () => {
 
 if (dropdownTrigger) {
     const dropdownItem = dropdownTrigger.parentElement;
-
-    dropdownTrigger.addEventListener('click', (event) => {
-        if (window.matchMedia('(max-width: 640px)').matches && !dropdownItem.classList.contains('is-open')) {
-            event.preventDefault();
-            dropdownItem.classList.add('is-open');
-            dropdownTrigger.setAttribute('aria-expanded', 'true');
-        }
-    });
 
     document.addEventListener('click', (event) => {
         if (!dropdownItem.contains(event.target)) {
